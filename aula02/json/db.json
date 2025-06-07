@@ -1,0 +1,43 @@
+{
+  "usuarios": [
+    {
+      "nome": "Kayo",
+      "id": "2"
+    },
+    {
+      "id": "b04a",
+      "nome": "Carla"
+    },
+    {
+      "id": "4a98",
+      "nome": "Carla"
+    },
+    {
+      "id": "dd49",
+      "nome": "Carla"
+    },
+    {
+      "id": "3e3b",
+      "nome": "Carla"
+    },
+    {
+      "id": "8375",
+      "nome": "Carla"
+    },
+    {
+      "id": "5055",
+      "nome": "Carla"
+    },
+    {
+      "id": "5403",
+      "nome": "Carla"
+    },
+    {
+      "id": "d909"
+    },
+    {
+      "id": "0b4a",
+      "nome": "Kayo"
+    }
+  ]
+}
