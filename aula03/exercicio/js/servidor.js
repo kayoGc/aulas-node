@@ -9,7 +9,9 @@ const PORT = 8001;
 // ouve qualquer requisição
 app.use((req, res) => {
     // vai ler o arquivo index.html
-    fs.readFile('aula03/index.html', 'utf-8', (err, data) => {
+    // precisa rodar a partir da pasta aulas-node
+    // caso rodar da pasta src/js trocar 'aulas03/index.html' para '../../index.html'
+    fs.readFile('aulas03/index.html', 'utf-8', (err, data) => {
         // se tiver erro
         if (err) {
             // manda uma resposta sinalizando um erro do servidor
