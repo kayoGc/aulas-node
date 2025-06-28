@@ -1,8 +1,8 @@
-const postModel = require('./models/post');
+const postModel = require('../models/postModel');
 const fs = require('fs');
 const path = require('path');
 
-exports.listaPosts = async (req, res)  => {
+exports.listarPosts = async (req, res)  => {
     const posts = await postModel.buscarPosts();
 
     fs.readFile(path.join(__dirname, '../views/index.html'), 'utf8', (err, html) => {
@@ -12,7 +12,7 @@ exports.listaPosts = async (req, res)  => {
         };
 
         const conteudo = posts.slice(0, 10).map(post => `
-            <div>
+            <div class="post">
                 <h2>${post.title}</h2>
                 <p>${post.body}</p>
             </div>
