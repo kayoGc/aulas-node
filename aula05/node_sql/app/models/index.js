@@ -4,10 +4,9 @@
  * e exporta tudo junto para usar nas outras partes do app
  */
 
-// depedencias
-const Sequelize = require('sequelize');
-// modulos proprios
-const dbConfig = require("../config/db.config.js");
+import dbConfig from "../config/db.config.js";
+import Sequelize from 'sequelize';
+import tutorialModel from "./tutorial.model.js";
 
 /**
  * Configura o sequelize
@@ -24,11 +23,10 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     }
 });
 
-const db = {};
+const db = {
+    Sequelize,
+    sequelize,
+    tutorial: tutorialModel(sequelize, Sequelize)
+};
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
-
-db.tutorials = require("./tutorial.model.js")(sequelize, Sequelize);
-
-module.exports = db;
+export default db;

@@ -3,39 +3,44 @@
  */
 
 // depedencias
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import db from './app/config/db.config.js';
+import tutorialRoutes from './app/routes/tutorial.routes.js';
 
 // inicia o express
 const app = express();
 
 // config do cors
 var corsOptions = {
-    origin: "http://localhost:8080"
+    origin: "http://localhost:8081"
 };
 
 app.use(cors(corsOptions));
+
+// middleware para json e urlenconded
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-// configs do model
-const db = require("../node_sql/models");
 
-db.sequelize.sync()
-    .then(() => {
-        console.log("Banco de dados sicronizado");
-    })
-    .catch(error => {
-        console.log(`Falha ao sicronizar db: ${error.message}`);
-    })
+app.get("/", (req, res) => res.json({ message: 'Bem-vindo!' }));
 
-// rota simples
-app.get("/", (req, res) => {
-    res.json({message: "Bem vindo!!!"});
-});
+// rotas
+app.use('/api/tutorials', tutorialRoutes);
 
-// seta porta, escuranto requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}.`);
-});
+const startServer = async () => {
+    try {
+        await db.sequelize.sync();
+
+        const PORT = process.env.PORT || 8081;
+
+        app.listen(PORT, () => {
+            console.log(`Servidor rodando na porta ${PORT}.`);
+        })
+    } catch (error) {
+        console.error("Falha ao sicronizar com o banco de dados:", error.message);
+        process.exit(1);
+     }
+}
+
+startServer();
